@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Participant Details{% endblock %}
+
+{% block hero %}
+<h1>Join the Quiz</h1>
+<p>Enter your details to get started.</p>
+{% endblock %}
+
+{% block content %}
+<section>
+  <div style="max-width:720px;margin:0 auto;">
+    <form id="participantForm" method="post" novalidate>
+      {% csrf_token %}
+
+      {{ form.as_p }}
+      <div style="display:flex;gap:.5rem;">
+        <button type="submit" class="cta" style="background:#0ea5e9;">Register</button>
+        <a href="/" class="cta" style="background:#64748b; color:white;">Cancel</a>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

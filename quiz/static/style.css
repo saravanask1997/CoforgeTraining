@@ -1,0 +1,42 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--color-body);
+  background: #fff;
+}
+
+/* Make the whole page a column layout */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh; /* use 100vh if 100dvh is not desired */
+}
+
+/* Header stays sticky as you already have it */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--color-bg);
+  color: var(--color-text);
+  box-shadow: var(--shadow);
+}
+
+/* Main should take remaining vertical space */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  flex: 1; /* <- key line: fills space so footer sits at bottom */
+}
+
+/* Footer is pushed to bottom by flex auto margin */
+footer {
+  background: #0a1d38;
+  color: #cfe2ff;
+  text-align: center;
+  padding: 1rem;
+  font-size: .9rem;
+  margin-top: auto; /* <- ensures footer sticks to bottom when content is short */
+}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+<h1>{{ quiz.title }}</h1>
+<p>Participant: {{ participant.name }} ({{ participant.employee_id }})</p>
+
+<form method="post">
+    {% csrf_token %}
+
+    {% for q in question %}
+        <div style="margin-bottom: 20px;">
+            <p><strong>{{ forloop.counter }}. {{ q.question }}</strong></p>
+
+            {% if q.image_url %}
+                <img src="{{ q.image_url }}" width="300">
+            {% endif %}
+
+            <label><input type="radio" name="{{ q.id }}" value="A"> {{ q.option_one }}</label><br>
+            <label><input type="radio" name="{{ q.id }}" value="B"> {{ q.option_two }}</label><br>
+
+            {% if q.option_three %}
+                <label><input type="radio" name="{{ q.id }}" value="C"> {{ q.option_three }}</label><br>
+            {% endif %}
+            {% if q.option_four %}
+                <label><input type="radio" name="{{ q.id }}" value="D"> {{ q.option_four }}</label><br>
+            {% endif %}
+            {% if q.option_five %}
+                <label><input type="radio" name="{{ q.id }}" value="E"> {{ q.option_five }}</label><br>
+            {% endif %}
+            {% if q.option_six %}
+                <label><input type="radio" name="{{ q.id }}" value="F"> {{ q.option_six }}</label><br>
+            {% endif %}
+            {% if q.option_seven %}
+                <label><input type="radio" name="{{ q.id }}" value="G"> {{ q.option_seven }}</label><br>
+            {% endif %}
+            {% if q.option_eight %}
+                <label><input type="radio" name="{{ q.id }}" value="H"> {{ q.option_eight }}</label><br>
+            {% endif %}
+            {% if q.option_nine %}
+                <label><input type="radio" name="{{ q.id }}" value="I"> {{ q.option_nine }}</label><br>
+            {% endif %}
+            {% if q.option_ten %}
+                <label><input type="radio" name="{{ q.id }}" value="J"> {{ q.option_ten }}</label><br>
+            {% endif %}
+
+        </div>
+        <hr>
+    {% endfor %}
+
+    <button type="submit">Submit</button>
+</form>
+

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Choose a Quiz{% endblock %}
+{% block meta_description %}Pick your quiz to start.{% endblock %}
+
+{% block hero %}
+<div class="text-center my-4">
+  <h1 class="fw-bold">Choose a Quiz</h1>
+  <p class="text-muted">Select a quiz and start your challenge!</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width:600px;">
+
+  <!-- Welcome Card -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title mb-2">Welcome</h5>
+      <p class="mb-0">
+        <strong>{{ participant.name }}</strong>
+        <span class="text-muted">({{ participant.employee_id }})</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Quiz Selection Form -->
+  <form method="post" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="{{ form.quiz.id_for_label }}" class="form-label">Select Quiz</label>
+      {{ form.quiz }}
+      {% if form.quiz.errors %}
+        <div class="invalid-feedback d-block">
+          {{ form.quiz.errors|striptags }}
+        </div>
+      {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Start Quiz</button>
+  </form>
+
+  <!-- Messages -->
+  {% if messages %}
+    <div class="mt-4">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mb-2">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

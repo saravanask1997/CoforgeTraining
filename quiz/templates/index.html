@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block hero %}
+
+
+  {# SAFE CTA: Only let users proceed after entering details #}
+    <h1>Welcome to Coforge Training</h1>
+    <p>Sharpen your skills with interactive quizzes and track your progress.</p>
+    <br>
+    <br>
+
+      <a href="{% url 'register_participant' %}" class="cta">Register Here</a>
+
+
+
+{% endblock %}
+
+{% block content %}
+  <!-- Popular (placeholder) -->
+  <section>
+    <h2 style="margin-top:0">Available Quizzes</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+      {% for i in quizzes %}
+        <article style="border:1px solid #e5e7eb;border-radius:12px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,0.06)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h3 style="margin:.25rem 0">Quiz {{ forloop.counter }}</h3>
+            <span style="background:#33B1FF;color:#062038;padding:.25rem .5rem;border-radius:999px;font-size:.8rem;font-weight:700">Category</span>
+          </div>
+          <p style="color:#6b7280;margin:.25rem 0 1rem">Register Above and Attempt available quizzes.</p>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

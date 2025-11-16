@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Coforge Training{% endblock %}</title>
+    <link rel="stylesheet" href="..\static\style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <meta name="description" content="{% block meta_description %}{% endblock %}">
+  <style>
+    :root {
+      --color-bg: #0B1F3A;
+      --color-bg-2: #0f2746;
+      --color-text: #ffffff;
+      --color-accent: #33B1FF;
+      --color-body: #111827;
+      --radius: 12px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color: var(--color-body); background: #fff; }
+
+    /* Header */
+    .site-header { position: sticky; top: 0; z-index: 1000; background: var(--color-bg); color: var(--color-text); box-shadow: var(--shadow); }
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: .75rem 1rem; max-width: 1200px; margin: 0 auto; }
+    .brand { color: var(--color-text); text-decoration: none; font-weight: 700; }
+    .nav { display: flex; gap: .5rem; }
+    .nav-link { color: var(--color-text); text-decoration: none; padding: .5rem .75rem; border-radius: 8px; }
+    .nav-link:hover { background: var(--color-bg-2); }
+
+    /* Mobile */
+    .hamburger { display: none; background: transparent; border: 0; color: var(--color-text); font-size: 1.5rem; }
+    .mobile-panel { display: none; background: var(--color-bg); }
+    .mobile-panel a { display: block; color: var(--color-text); padding: .75rem 1rem; text-decoration: none; }
+    .mobile-panel a:hover { background: var(--color-bg-2); }
+    @media (max-width: 960px) { .nav { display: none; } .hamburger { display: inline-flex; } .mobile-open .mobile-panel { display: block; } }
+
+    /* Hero */
+    .hero { background: linear-gradient(120deg, var(--color-bg), #142b54); color: var(--color-text); padding: 3rem 1rem; text-align: center; }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: .5rem; }
+    .hero p { color: #dbe6ff; margin-bottom: 1rem; }
+    .cta { background: var(--color-accent); color: #062038; padding: .75rem 1rem; border-radius: 10px; text-decoration: none; font-weight: 600; }
+
+    /* Main & footer */
+    main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+    footer { background: #0a1d38; color: #cfe2ff; text-align: center; padding: 1rem; font-size: .9rem; }
+  </style>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+<header class="site-header">
+  <div class="topbar">
+    <nav class="nav">
+      <a href="{% url 'home' %}" class="nav-link">Home</a>
+
+      {% if request.user.is_staff %}
+        <a href="#" class="nav-link">Export</a>
+      {% endif %}
+    </nav>
+    <button class="hamburger" id="hamburger">☰</button>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="{% url 'home' %}">Home</a>
+
+    {% if request.user.is_staff %}
+      <a href="#">Export</a>
+    {% endif %}
+  </div>
+</header>
+<section class="hero">
+  {% block hero %}
+
+  {% endblock %}
+</section>
+<main>
+  {% block content %}{% endblock %}
+</main>
+<footer>
+  © {{ now|default:"2025" }} Coforge Training. All rights reserved.
+</footer>
+<script>
+  const btn = document.getElementById('hamburger');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      document.body.classList.toggle('mobile-open');
+    });
+  }
+</script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>
