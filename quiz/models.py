@@ -53,3 +53,4 @@ class UserAnswer(models.Model):
 
     class Meta:
         unique_together = ('attempt', 'question')
+        verbose_name = "User Answer Question"

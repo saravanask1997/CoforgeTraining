@@ -21,9 +21,8 @@
       <form method="post" class="needs-validation" novalidate>
         {% csrf_token %}
 
-        <!-- Question text -->
         <div class="mb-3">
-          <h5 class="mb-2">{{ question.question }}</h5>
+            <h5 class="mb-2">{{ question.question|safe }}</h5>
         </div>
 
         <!-- Image: prefer uploaded image; fallback to URL -->
