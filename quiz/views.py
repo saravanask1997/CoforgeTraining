@@ -272,3 +272,7 @@ def export_quiz_data(request):
     response["Content-Disposition"] = "attachment; filename=quiz_responses.xlsx"
     wb.save(response)
     return response
+
+def robots_txt(request):
+    content = "User-agent: *\nDisallow: /"
+    return HttpResponse(content, content_type="text/plain")
