@@ -246,7 +246,7 @@ def export_quiz_data(request):
     ws.append([
         "Participant ID", "Participant Name", "Designation", "Team Lead",
         "Manager", "Quiz Title", "Attempt Time", "Question ID",
-        "Question", "Selected Option"
+        "Question", "Selected Option", "Points (Max)"
     ])
 
     attempts = QuizAttempt.objects.select_related('participant', 'quiz')
@@ -263,7 +263,8 @@ def export_quiz_data(request):
                 attempt.created_at.strftime("%Y-%m-%d %H:%M:%S"),
                 a.question.id,
                 a.question.question,  # <-- use the correct field name
-                a.selected_option
+                a.selected_option,
+                a.question.points,
             ])
 
     response = HttpResponse(
@@ -273,6 +274,3 @@ def export_quiz_data(request):
     wb.save(response)
     return response
 
-def robots_txt(request):
-    content = "User-agent: *\nDisallow: /"
-    return HttpResponse(content, content_type="text/plain")
